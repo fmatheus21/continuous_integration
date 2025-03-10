@@ -4,7 +4,7 @@ server:
         context-path: ${CONTEXT_PATH:/api/v1}
 spring:
     application:
-        name: ci_cd_
+        name: ci_cd
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: ${SPRING_DATASOURCE_PASSWORD}

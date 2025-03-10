@@ -1,11 +1,9 @@
 CREATE TABLE customer (
-  id INT NOT NULL AUTO_INCREMENT,
-  name varchar(70) NOT NULL,
-  document varchar(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY id_UNIQUE (id),
-  UNIQUE KEY document_UNIQUE (document)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(70) NOT NULL,
+  document VARCHAR(20) NOT NULL,
+  UNIQUE (document)
+);
 
 INSERT INTO customer (id, name, document) VALUES
 (1, 'Julia Gabrielly Carvalho', '42830860101'),
