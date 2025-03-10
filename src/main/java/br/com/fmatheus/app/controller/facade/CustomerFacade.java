@@ -1,5 +1,6 @@
 package br.com.fmatheus.app.controller.facade;
 
+import br.com.fmatheus.app.controller.exception.NotFoundException;
 import br.com.fmatheus.app.model.entity.Customer;
 import br.com.fmatheus.app.model.service.CustomerService;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class CustomerFacade {
     }
 
     public Customer findById(Integer id) {
-        return this.customerService.findById(id).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
+        return this.customerService.findById(id).orElseThrow(() -> new NotFoundException("Registro não encontrado."));
     }
 
     public Collection<Customer> list() {
