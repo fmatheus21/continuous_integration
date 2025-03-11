@@ -37,11 +37,11 @@ class CustomerResourceTest {
     @Autowired
     private Flyway flyway;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll(@Autowired Flyway flyway) {
+        flyway.clean(); // Limpa o banco antes de rodar as migrations
         flyway.migrate();
     }
-
 
     @Test
     @Order(1)

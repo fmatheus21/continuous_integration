@@ -1,0 +1,53 @@
+version: "3.4"
+
+services:
+  cicd-db:
+    image: mysql:8.0.29
+    container_name: cicd-db
+    hostname: cicd-db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: cicd
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_TCP_PORT: 3308
+    ports:
+      - "3308:3308"
+    expose:
+      - 3308
+    networks:
+      - cicd-network
+
+  ci-cd:
+    image: fmatheus21/ci-cd
+    container_name: ci-cd
+    hostname: ci-cd
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      SPRING.APPLICATION.NAME: ci-cd
+      SPRING.DATASOURCE.URL: jdbc:mysql://cicd-db:3308/cicd?useSSL=false&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
+      SPRING.DATASOURCE.USERNAME: docker
+      SPRING.DATASOURCE.PASSWORD: admin123
+      SPRING.FLYWAY.URL: jdbc:mysql://cicd-db:3308/cicd?useSSL=false&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
+      SPRING.FLYWAY.USER: docker
+      SPRING.FLYWAY.PASSWORD: admin123
+      SPRING.JPA.SHOWSQL: "false"
+      SERVER.PORT: "8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - cicd-db
+    networks:
+      - cicd-network
+
+networks:
+  cicd-network:
+    driver: bridge

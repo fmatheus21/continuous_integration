@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.com.fmatheus</groupId>
     <artifactId>ci_cd</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>ci_cd</name>
     <description>Projeto de estudos CI/CD</description>
     <url/>
@@ -79,6 +79,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>fmatheus21/${project.artifactId}:${project.version}</name>
+                    </image>
+                    <pullPolicy>IF_NOT_PRESENT</pullPolicy>
+                </configuration>
             </plugin>
         </plugins>
     </build>
