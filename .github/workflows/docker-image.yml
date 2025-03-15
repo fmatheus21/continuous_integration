@@ -47,14 +47,19 @@ jobs:
       #working-directory: ./
       run: mvn clean package -DskipTests
 
-    - name: Docker Compose Build
-      working-directory: ./
-      run: docker compose build
+    #- name: Docker Compose Build
+    #  working-directory: ./
+    #  run: docker compose build
+
+    - name: Build Docker Image
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cicd:latest .
+
+    - name: List Docker Images
+      run: docker images
 
     - name: Push to Dockerhub Container Registry
       run: |
           docker tag ${{ secrets.DOCKER_USERNAME }}/cicd:latest ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
-          docker tag ${{ secrets.DOCKER_USERNAME }}/cicd:latest ${{ secrets.DOCKER_USERNAME }}/cicd:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
           docker push ${{ secrets.DOCKER_USERNAME }}/cicd:latest
 
