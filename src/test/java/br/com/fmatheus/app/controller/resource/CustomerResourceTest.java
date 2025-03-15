@@ -39,7 +39,7 @@ class CustomerResourceTest {
 
     @BeforeAll
     static void beforeAll(@Autowired Flyway flyway) {
-        flyway.clean(); // Limpa o banco antes de rodar as migrations
+        flyway.clean();
         flyway.migrate();
     }
 
