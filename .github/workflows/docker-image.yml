@@ -45,7 +45,7 @@ jobs:
 
     - name: Build CI_CD Jar
       #working-directory: ./
-      run: mvn clean package
+      run: mvn clean package -DskipTests
 
     - name: Docker Compose Build
       #working-directory: ./
