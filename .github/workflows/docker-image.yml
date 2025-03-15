@@ -49,7 +49,7 @@ jobs:
 
     - name: Docker Compose Build
       working-directory: ./
-      run: docker-compose build
+      run: docker compose build
 
     - name: Push to Dockerhub Container Registry
       run: |
