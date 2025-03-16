@@ -47,6 +47,7 @@ jobs:
       run: mvn clean package -DskipTests
 
   build:
+
     needs: test
 
     - name: Build Docker Image
