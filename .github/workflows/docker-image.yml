@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  test:
+  build:
 
     runs-on: ubuntu-latest
     permissions:
@@ -45,19 +45,6 @@ jobs:
 
     - name: Build CI_CD Jar
       run: mvn clean package -DskipTests
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
-
-    steps:
-
-    - name: Checkout repository
-      uses: actions/checkout@v4
 
     - name: Build Docker Image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cicd:latest .
