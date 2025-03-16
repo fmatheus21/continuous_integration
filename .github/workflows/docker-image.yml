@@ -8,13 +8,29 @@ on:
 
 jobs:
 
-  build:
+  test:
 
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
       id-token: write
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4.7.0
+      with:
+        java-version: '21'
+        distribution: 'adopt'
+
+    - name: Run Tests and Package Application
+      env:
+        SPRING_PROFILES_ACTIVE: test
+      run: mvn clean verify
+
+    - name: Build CI_CD Jar
+      run: mvn clean package -DskipTests
+
+  build:
 
     steps:
     - name: Checkout repository
@@ -31,20 +47,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Setup Java JDK
-      uses: actions/setup-java@v4.7.0
-      with:
-        java-version: '21'
-        distribution: 'adopt'
-    
-    - name: Run Tests and Package Application
-      env:
-        SPRING_PROFILES_ACTIVE: test
-      run: mvn clean verify
-
-    - name: Build CI_CD Jar
-      run: mvn clean package -DskipTests
 
     - name: Build Docker Image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/cicd:latest .
