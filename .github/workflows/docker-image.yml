@@ -59,7 +59,7 @@ jobs:
 
     - name: Push to Dockerhub Container Registry
       run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/cicd:latest ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/cicd:latest
-
+           docker tag ${{ secrets.DOCKER_USERNAME }}/cicd:latest ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
+           docker tag ${{ secrets.DOCKER_USERNAME }}/cicd:latest ${{ secrets.DOCKER_USERNAME }}/cicd:latest
+           docker push ${{ secrets.DOCKER_USERNAME }}/cicd:${{ github.run_id }}
+           docker push ${{ secrets.DOCKER_USERNAME }}/cicd:latest
