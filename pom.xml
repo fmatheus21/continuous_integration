@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.fmatheus</groupId>
-    <artifactId>ci_cd</artifactId>
+    <artifactId>continuous_integration</artifactId>
     <version>0.0.1</version>
     <name>ci_cd</name>
     <description>Projeto de estudos CI/CD</description>
