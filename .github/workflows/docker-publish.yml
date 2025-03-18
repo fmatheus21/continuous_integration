@@ -57,8 +57,7 @@ jobs:
       run: mvn clean verify
 
     - name: Build CI_CD Jar
-      #working-directory: ./
-      run: mvn clean package -DskipTests
+      run: mvn clean package -Dspring.profiles.active=test
 
     #- name: Docker Compose Build
     #  working-directory: ./
