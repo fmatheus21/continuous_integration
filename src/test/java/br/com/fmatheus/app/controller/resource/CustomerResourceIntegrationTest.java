@@ -16,14 +16,14 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@ActiveProfiles("test")
-class CustomerResourceTest {
+@ExtendWith(SpringExtension.class)
+class CustomerResourceIntegrationTest {
 
-    private final static String URL = "/customers";
+    private static final String URL = "/customers";
 
     @Autowired
     private WebTestClient webTestClient;
