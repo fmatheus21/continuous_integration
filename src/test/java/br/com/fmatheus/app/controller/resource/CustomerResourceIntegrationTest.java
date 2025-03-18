@@ -21,9 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureWebTestClient
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test")
-class CustomerResourceTest {
+class CustomerResourceIntegrationTest {
 
-    private final static String URL = "/customers";
+    private static final String URL = "/customers";
 
     @Autowired
     private WebTestClient webTestClient;
